@@ -1,0 +1,44 @@
+namespace Prolect_Git
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string expression = Console.ReadLine().Replace(" ", "");
+            
+            List<string> operations = new List<string>(); // Список в который мы будем добавлять операторы
+            List<int> digit = new List<int>(); // Список в который мы будем добавлять цифры
+
+            string variable = ""; // переменная для добавления числа
+
+            foreach (char i in expression) // проходимся по строке
+            {
+                if (int.TryParse(i.ToString(), out _)) // проверяем, являктся ли число числом и если нет, то переходим в else
+                {
+                    variable += i; // добваляем число до первого встр оператора
+                }
+                else
+                {
+                    operations.Add(i.ToString()); //добаляем оператор который нам встретился
+                    digit.Add(int.Parse(variable)); //добаляем b из if
+                    variable = ""; //обнуляем b
+                }
+            }
+
+            digit.Add(int.Parse(variable)); // добваляем последнее число тк после него нет оператора
+            
+            foreach (int j in digit)
+            {
+                Console.Write(j.ToString() + " "); // выводим числа
+            }
+            
+            Console.WriteLine();
+            
+            foreach (string k in operations)
+            {
+                Console.Write(k.ToString() + " "); // выводим операторы
+            }
+        
+        }
+    }
+}
