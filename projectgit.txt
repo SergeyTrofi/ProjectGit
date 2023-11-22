@@ -1,44 +1,35 @@
-namespace Prolect_Git
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.Design;
+
+namespace SergoOneTwoThreeLabs
 {
-    internal class Program
+    class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            string expression = Console.ReadLine().Replace(" ", "");
-            
-            List<string> operations = new List<string>(); // Список в который мы будем добавлять операторы
-            List<int> digit = new List<int>(); // Список в который мы будем добавлять цифры
-
-            string variable = ""; // переменная для добавления числа
-
-            foreach (char i in expression) // проходимся по строке
+            string a = Console.ReadLine();
+            List<char> listnumber = new List<char>();
+            List<string> listoper = new List<string>();
+            for (int i = 0; i < a.Length; i++)
             {
-                if (int.TryParse(i.ToString(), out _)) // проверяем, являктся ли число числом и если нет, то переходим в else
+                char ch = a[i];
+                if (char.IsDigit(ch))
                 {
-                    variable += i; // добваляем число до первого встр оператора
+                    listnumber.Add(ch);
                 }
                 else
                 {
-                    operations.Add(i.ToString()); //добаляем оператор который нам встретился
-                    digit.Add(int.Parse(variable)); //добаляем b из if
-                    variable = ""; //обнуляем b
+                    listoper.Add(Char.ToString(ch));
                 }
             }
 
-            digit.Add(int.Parse(variable)); // добваляем последнее число тк после него нет оператора
-            
-            foreach (int j in digit)
-            {
-                Console.Write(j.ToString() + " "); // выводим числа
-            }
-            
-            Console.WriteLine();
-            
-            foreach (string k in operations)
-            {
-                Console.Write(k.ToString() + " "); // выводим операторы
-            }
-        
+
+            Console.WriteLine((string.Join(" ", listnumber)).Replace(" ", ""));
+            Console.WriteLine((string.Join(" ", listoper)).Replace(" ", ""));
+            double rez = Convert.ToDouble(new System.Data.DataTable().Compute(a, ""));
+            Console.WriteLine(rez);
         }
+
     }
 }
